@@ -14,3 +14,12 @@ nb-configuration.xml
 *.jar
 *.war
 *.ear
+
+#general swap/backup files
+*.so
+*.log
+*.out
+*~
+*.swp
+*.DS_Store
+*.lock
