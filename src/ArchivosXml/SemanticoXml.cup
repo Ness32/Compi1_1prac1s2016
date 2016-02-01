@@ -1,0 +1,46 @@
+package ppractica2016_200915715;
+import java.io.*;
+import java_cup.runtime.*;
+import java.util.*;
+
+
+action code{:
+
+static Stack pilaXml= new Stack();
+static Stack erroresXML= new Stack();
+
+:}
+
+parser code
+
+{:
+/**Metodo al que se llama automáticamente ante algún error sintactico.*/
+public void syntax_error(Symbol s){
+System.out.println("Error en la Línea " + (s.right+1) +" Columna "+s.left+ " Identificador " +s.value + " no reconocido." );
+}
+/**Metodo al que se llama en el momento en que ya no es posible una recuperación de errores.*/
+public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{
+System.out.println("Error en la Línea " + (s.right+1)+ "Columna "+s.left+". Identificador " + s.value + " no reconocido.");
+}
+
+:}
+
+terminal Tk_Abrir, Tk_Cerrar , Tk_Diag, Tk_LlaveA, Tk_LlaveB, Tk_Comillas
+terminal Tk_Name, Tk_Luga, Tk_Puntos, Tk_Error
+
+non terminal Linea0,Linea1,Linea2,Linea3,Linea4,Linea5,Linea6
+
+start with Linea0;
+
+Linea0::= Tk_Abrir Linea1;
+         
+
+Linea1::= Tk_Cont Linea2
+          |Tk_Diag  Tk_Name Linea2;
+
+Linea2::= TK_Cerrar Linea3
+         |;
+
+Linea3::= Tk_Comillas Tk_Name Tk_Comillas Linea4;
+
+Linea4::=
