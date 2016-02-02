@@ -16,6 +16,8 @@ public class Ppractica2016_200915715 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        Ide mostrar = new  Ide();
+        mostrar.setVisible(true);
     }
     
 }
