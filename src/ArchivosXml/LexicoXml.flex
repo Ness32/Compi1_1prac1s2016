@@ -11,10 +11,11 @@ import java_cup.runtime.Symbol;
 %char
 %line
 %cup
+%ignorecase
 %unicode
 Lt=[a-zA-ZÑñ_]
 Dg=[0-9]
-Luga=([a-zA-ZÑ_])([A-Za-z0-9]|["_"]|["-"]|["/"]|[":"]|["\\"]|["."])*
+Luga=(["/"]([a-zA-ZÑ_]))([A-Za-z0-9]|["_"]|["-"]|["/"]|[":"]|["\\"]|["."])*
 %%
 
 
