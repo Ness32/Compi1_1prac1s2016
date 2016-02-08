@@ -6,10 +6,10 @@ import javax.swing.JOptionPane;
 
 
 action code{:
-
+/*
 static Stack pilaXml= new Stack();
 static Stack erroresXmL= new Stack();
-
+*/
 :}
 
 parser code
@@ -29,7 +29,7 @@ System.out.println("Error en la Línea " + (s.right+1)+ "Columna "+s.left+". Ide
 terminal Tk_Abrir,Tk_Cerrar,Tk_Diag,Tk_Comillas,Tk_Proy,Tk_Arch,Tk_Date,Tk_Error;
 terminal Tk_Name,Tk_Luga,Tk_Guion,Tk_Dia,Tk_Mes,Tk_Year,Tk_Files,Tk_Ruta,Tk_Cont,Tk_Puntos;
 
-non terminal Linea0,Linea1,Linea2,Linea3,Linea4,Linea5,Linea6,Linea7,Linea8,Linea9,Linea10,Linea11;
+non terminal Linea0,Linea1,Linea2,Linea3,Linea4,Linea5,Linea6,Linea7,Linea8,Linea9,Linea10,Linea11,Linea12;
 
 start with Linea0;
 
@@ -43,7 +43,7 @@ Linea2::= Tk_Abrir Linea3;
 Linea3::= Tk_Name Tk_Cerrar Linea4
          |Tk_Arch Tk_Cerrar Linea2
          |Tk_Files Tk_Cerrar Linea2
-         |Tk_Ruta Tk_Cerrar Linea4
+         |Tk_Ruta Tk_Cerrar Linea12
          |Tk_Date Tk_Cerrar Linea9;
 
 Linea4::= Tk_Comillas Tk_Cont Tk_Comillas Linea5;
@@ -62,5 +62,6 @@ Linea7::=Tk_Cerrar Linea8;
 Linea8::= Tk_Abrir Tk_Diag Tk_Proy Tk_Cerrar{:JOptionPane.showMessageDialog(null, "Copilacion Exitosa ", "Copilacion", JOptionPane.WARNING_MESSAGE);:};
 
 Linea9::= Tk_Dia Tk_Guion Linea10; 
-Linea10::= Tk_Dia Tk_Guion Linea11; 
+Linea10::= Tk_Cont Tk_Guion Linea11; 
 Linea11::= Tk_Year Linea5;
+ Linea12::= Tk_Comillas Tk_Luga Tk_Comillas Linea5;
