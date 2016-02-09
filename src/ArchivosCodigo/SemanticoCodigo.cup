@@ -24,15 +24,16 @@ System.out.println("Error en la Línea " + (s.right+1)+ "Columna "+s.left+". Ide
 
 :}
 
-terminal Tk_import,Tk_abrir,Tk_comillas,Tk_ruta,Tk_puntoComa,Tk_public,Tk_private,Tk_protect,Tk_clase,Tk_name;  
-terminal Tk_heredar,Tk_open,Tk_DobleB,Tk_Comentario,Tk_OpenC,Tk_string,Tk_double,Tk_bool,Tk_int,Tk_char,Tk_void ;
-terminal Tk_NameVar,Tk_puntoComa,Tk_Coma,Tk_suma,Tk_resta,Tk_div,Tk_multi,Tk_plus,Tk_minus,Tk_mayor,Tk_menor,Tk_mayorq;
+terminal Tk_import,Tk_abrir,Tk_comillas,Tk_ruta,Tk_public,Tk_private,Tk_protect,Tk_clase,Tk_name;  
+terminal Tk_heredar,Tk_DobleB,Tk_Comentario,Tk_OpenC,Tk_string,Tk_double,Tk_bool,Tk_int,Tk_char,Tk_void ;
+terminal Tk_NameVar,Tk_suma,Tk_resta,Tk_div,Tk_multi,Tk_plus,Tk_minus,Tk_mayor,Tk_menor,Tk_mayorq;
 terminal Tk_menorq,Tk_igualIgual,Tk_dif,Tk_Abrir,Tk_Cerrar,Tk_Not,Tk_Or,Tk_xOr,Tk_And,Tk_Comillas,Tk_Open,Tk_Close,Tk_Coma;
 terminal Tk_Igual,Tk_print,Tk_mientras,Tk_true,Tk_false,Tk_Asig,Tk_puntoComa,Tk_Super,Tk_Over,Tk_new,Tk_Firts,Tk_Si;
-terminal Tk_SiNoSi,Tk_SiNo,Tk_Inter,Tk_Caso,Tk_Defec,Tk_Mientras,Tk_Hacer,TK_Continuar,Tk_Exit; 
+terminal Tk_CloseC,Tk_SiNoSi,Tk_SiNo,Tk_Inter,Tk_Caso,Tk_Defec,Tk_Mientras,Tk_Hacer,TK_Continuar,Tk_Exit,Tk_return,Tk_Continuar,Tk_Error; 
+
 
 non terminal Linea0,Linea1,Linea2,Linea3;
-non terminal LineaComen,LineaVar,LineaVar1,LineaOpera,LineaRela,LineaAgrupa,LineaLog,LineaGen,LineaAsig,LineaMetod,LineaSente,LineaVisi;
+non terminal LineaComen,LineaVar,LineaVar1,LineaOpera,LineaRela,LineaAgrupa,LineaLog,LineaGen,LineaAsig,LineaMetod,LineaSente,LineaVisi,LineaCyH;
 
 start with Linea0;
 
@@ -53,7 +54,7 @@ LineaCyH::= Tk_heredar
 
 //Comentarios
 
-LineaComen::= Tk_DobleB Tk_Comentario ; //Comentario Simple
+LineaComen::= Tk_DobleB Tk_Comentario  //Comentario Simple
              |Tk_OpenC Tk_Comentario Tk_DobleB; //Comentario Doble
 
 
@@ -143,9 +144,10 @@ LineaSente::=Tk_Si
 */
 
 Linea1::= LineaVisi Tk_name LineaCyH Tk_name LineaGen Linea2
-        |LineaVisi Tk_name LineaGen Linea2
+        |LineaVisi LineaVar Tk_name LineaAgrupa LineaGen Linea2;
 
-Linea2::=LineaSente LineasAgrupacion 
+Linea2::= LineaSente LineaAgrupa Tk_name LineaRela LineaGen Linea2
+        |LineaVar1 ;
 
 
 
