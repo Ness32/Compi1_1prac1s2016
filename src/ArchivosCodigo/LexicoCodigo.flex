@@ -27,6 +27,7 @@ Dg=[0-9]
 "#*"                      {return new Symbol(CaracterCodigo.Tk_OpenC,yychar,yyline,new String(yytext()));} 
 "*#"                      {return new Symbol(CaracterCodigo.Tk_CloseC,yychar,yyline,new String(yytext()));} 
 "//"                      {return new Symbol(CaracterCodigo.Tk_DobleB,yychar,yyline,new String(yytext()));}
+
 /*
 *
 *Tipos de Datos
@@ -45,7 +46,7 @@ Dg=[0-9]
 *
 *Operaciones arimeticas
 *
-*
+*/
 
 "+"                               {return new Symbol(CaracterCodigo.Tk_suma,yychar,yyline,new String(yytext()));} 
 "-"                               {return new Symbol(CaracterCodigo.Tk_resta,yychar,yyline,new String(yytext()));} 
@@ -110,7 +111,7 @@ Dg=[0-9]
 *
 *Palabras Reservadas de Visibilidad
 *
-/
+*/
 
 "publico"                     {return new Symbol(CaracterCodigo.Tk_public,yychar,yyline,new String(yytext()));} 
 "privado"                     {return new Symbol(CaracterCodigo.Tk_private,yychar,yyline,new String(yytext()));} 
@@ -174,6 +175,7 @@ Dg=[0-9]
 *Metodos y Funciones
 *
 */
+
 //En espera
 
 
@@ -218,3 +220,14 @@ Dg=[0-9]
 "HACER"                  {return new Symbol(CaracterCodigo.Tk_Hacer,yychar,yyline,new String(yytext()));} 
 "CONTINUAR"              {return new Symbol(CaracterCodigo.Tk_Continuar,yychar,yyline,new String(yytext()));} 
 "SALIR"                  {return new Symbol(CaracterCodigo.Tk_Exit,yychar,yyline,new String(yytext()));} 
+
+/*
+*
+*
+*
+*/
+
+
+{Lt}({Lt}|{Dg})*              {return new Symbol(CaracterCodigo.Tk_name,yychar,yyline,new String(yytext()));}
+.                             {return new Symbol(CaracterCodigo.Tk_Error,yychar,yyline,new String(yytext()));}
+
