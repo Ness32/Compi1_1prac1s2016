@@ -104,7 +104,7 @@ Dg=[0-9]
 "mientras"                     {return new Symbol(CaracterCodigo.Tk_mientras,yychar,yyline,new String(yytext()));}
 "true"                         {return new Symbol(CaracterCodigo.Tk_true,yychar,yyline,new String(yytext()));}
 "false"                        {return new Symbol(CaracterCodigo.Tk_false,yychar,yyline,new String(yytext()));}
-
+":"                            {return new Symbol(CaracterCodigo.Tk_Dosp,yychar,yyline,new String(yytext()));}
 
 
 /*
@@ -229,5 +229,6 @@ Dg=[0-9]
 
 
 {Lt}({Lt}|{Dg})*              {return new Symbol(CaracterCodigo.Tk_name,yychar,yyline,new String(yytext()));}
+[  \t\r\f\n]+                 {}
 .                             {return new Symbol(CaracterCodigo.Tk_Error,yychar,yyline,new String(yytext()));}
 
