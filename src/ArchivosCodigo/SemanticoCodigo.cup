@@ -32,8 +32,8 @@ terminal Tk_Igual,Tk_print,Tk_mientras,Tk_true,Tk_false,Tk_Asig,Tk_puntoComa,Tk_
 terminal Tk_CloseC,Tk_Dosp,Tk_SiNoSi,Tk_SiNo,Tk_Inter,Tk_Caso,Tk_Defec,Tk_Mientras,Tk_Hacer,TK_Continuar,Tk_Exit,Tk_return,Tk_Continuar,Tk_Error; 
 
 
-non terminal Linea0,Linea1,Linea2,Linea3,Linea4,Linea5;
-non terminal LineaComen,LineaVar,LineaVar1,LineaOpera,LineaRela,LineaAgrupa,LineaLog,LineaGen,LineaAsig,LineaMetod,LineaVisi,LineaCyH;
+non terminal Linea0,Linea1,Linea2,Linea3,Linea4,Linea5,Linea6,Linea7,Operaciones;
+non terminal LineaComen,LineaVar,LineaVar1,LineaConta,LineaOpera,LineaRela,LineaAgrupa,LineaLog,LineaGen,LineaAsig,LineaMetod,LineaVisi,LineaCyH;
 non terminal LineaSenteSi,LineaSenteCaso,LineaSenteMien,LineaSenteConti,LineaVar2;
 
 precedence left Tk_new; 
@@ -85,8 +85,9 @@ LineaVar2::= Tk_new Tk_name LineaAgrupa Tk_name LineaAgrupa
 LineaOpera::=Tk_suma
             |Tk_resta
             |Tk_div
-            |Tk_multi
-            |Tk_plus
+            |Tk_multi;
+
+LineaConta::=Tk_plus
             |Tk_minus;
 
 //Operaciones Relacionales
@@ -172,6 +173,13 @@ Linea4::=Linea3
         |LineaSenteMien LineaAgrupa Tk_name LineaAgrupa LineaGen Linea5;
 
 Linea5::= LineaSenteMien LineaGen Linea4;
+
+Operaciones:: Tk_Puntos Linea6;
+
+Linea6::=LineaOpera Linea7;
+
+Linea7::=Tk_Puntos Operaciones
+        |Tk_Puntos Tk_puntoComa;
 
 
 
