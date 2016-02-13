@@ -32,7 +32,7 @@ terminal Tk_Igual,Tk_print,Tk_mientras,Tk_true,Tk_false,Tk_Asig,Tk_puntoComa,Tk_
 terminal Tk_CloseC,Tk_Dosp,Tk_SiNoSi,Tk_SiNo,Tk_Inter,Tk_Caso,Tk_Defec,Tk_Mientras,Tk_Hacer,TK_Continuar,Tk_Exit,Tk_return,Tk_Continuar,Tk_Error; 
 
 
-non terminal Linea0,Linea1,Linea2,Linea3,Linea4,Linea5,Linea6,Linea7,Operaciones;
+non terminal Linea0,Linea1,Linea2,Linea3,Linea4,Linea5,Linea6,Linea7,Linea8,Operaciones,Comparacion;
 non terminal LineaComen,LineaVar,LineaVar1,LineaConta,LineaOpera,LineaRela,LineaAgrupa,LineaLog,LineaGen,LineaAsig,LineaMetod,LineaVisi,LineaCyH;
 non terminal LineaSenteSi,LineaSenteCaso,LineaSenteMien,LineaSenteConti,LineaVar2;
 
@@ -44,6 +44,12 @@ start with Linea0;
 Linea0::= Tk_import  LineaAgrupa Tk_Comillas Tk_name Tk_Comillas LineaAgrupa Tk_puntoComa Linea1
          |Linea1 //archivos de importacion
          |LineaComen Linea0;
+
+/*
+*
+*Declaraciones de  no terminales a usar
+*
+*/
 //visibilidad
 LineaVisi::= Tk_public 
          |Tk_private 
@@ -87,8 +93,8 @@ LineaOpera::=Tk_suma
             |Tk_div
             |Tk_multi;
 
-LineaConta::=Tk_plus
-            |Tk_minus;
+LineaConta::= Tk_name Tk_plus Tk_puntoComa 
+            |Tk_name Tk_minus Tk_puntoComa;
 
 //Operaciones Relacionales
 
@@ -151,35 +157,59 @@ LineaSenteConti::=TK_Continuar
                 |Tk_Exit;
 /*
 *
-*Area de Operaciones se comenzo en Linea0
+*Area de Desarrollo de la gramatica se comenzo en Linea0
 *
 *
 */
 
-Linea1::= LineaVisi LineaCyH Tk_name LineaCyH Tk_name LineaGen Linea2 LineaGen
-         |LineaVisi LineaVar Tk_name LineaAgrupa LineaAgrupa LineaGen Linea2;
+Linea1::= LineaVisi LineaCyH Tk_name LineaCyH Tk_name LineaGen Linea2 LineaGen {:JOptionPane.showMessageDialog(null, "Copilacion Exitosa ", "Copilacion", JOptionPane.WARNING_MESSAGE);:}
+         |LineaVisi LineaVar Tk_name LineaAgrupa LineaAgrupa LineaGen Linea2 LineaGen;
 
-Linea2::= LineaSenteSi LineaAgrupa Tk_name LineaRela LineaAgrupa  LineaGen Linea2 LineaGen
-         |LineaSenteCaso LineaAgrupa Tk_name LineaAgrupa LineaGen Linea3 LineaGen
-         |LineaMetod LineaAgrupa Tk_name LineaAgrupa LineaAsig
-         |LineaMetod Tk_name
-         |Linea1
-         |LineaComen Linea2
-         |LineaVar LineaVar1 Linea2 ;
+Linea2::= LineaSenteSi LineaAgrupa Tk_name LineaRela LineaAgrupa  LineaGen Linea2 LineaGen //Linea funciones        
+         |LineaSenteCaso LineaAgrupa Tk_name LineaAgrupa LineaGen Linea3 LineaGen  //If,While
+         |LineaMetod LineaAgrupa Tk_name LineaAgrupa LineaAsig // Metodos
+         |LineaMetod Tk_name //llamar metodo
+         |Linea1 //Si hay otro funcion
+         |LineaComen Linea2 //Comentario
+         |LineaVar LineaVar1 Linea2 //variables
+         |;
 
-Linea3::=LineaSenteCaso  Tk_name Tk_Dosp Linea4;
+Linea3::=LineaSenteCaso  Tk_name Tk_Dosp Linea4;//If,While
+
+/*
+*
+* Sentencias mientras
+*/
 
 Linea4::=Linea3
         |LineaSenteMien LineaAgrupa Tk_name LineaAgrupa LineaGen Linea5;
+/*
+*
+*Sentecnias mientras
+*/
 
 Linea5::= LineaSenteMien LineaGen Linea4;
 
-Operaciones:: Tk_Puntos Linea6;
+/*
+*
+* Operaciones suma resta multi div
+*/
+
+Operaciones::= Tk_Puntos Linea6;
+              
 
 Linea6::=LineaOpera Linea7;
 
 Linea7::=Tk_Puntos Operaciones
         |Tk_Puntos Tk_puntoComa;
+/*
+*
+*
+*/
+
+Linea8::= Tk_name LineaAgrupa Tk_Puntos LineaAgrupa LineaGen Linea2 LineaGen;//metodos
+
+Comparacion::= Tk_name LineaLog Tk_name; //comparaciones
 
 
 
