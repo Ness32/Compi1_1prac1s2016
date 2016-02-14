@@ -54,6 +54,7 @@ Dg=[0-9]
 "*"                               {return new Symbol(CaracterCodigo.Tk_multi,yychar,yyline,new String(yytext()));} 
 "++"                              {return new Symbol(CaracterCodigo.Tk_plus,yychar,yyline,new String(yytext()));} 
 "--"                              {return new Symbol(CaracterCodigo.Tk_minus,yychar,yyline,new String(yytext()));} 
+"^"                               {return new Symbol(CaracterCodigo.Tk_pote,yychar,yyline,new String(yytext()));} 
 
 /*
 *
@@ -213,7 +214,7 @@ Dg=[0-9]
 "SI"                     {return new Symbol(CaracterCodigo.Tk_Si,yychar,yyline,new String(yytext()));} 
 "SINO_SI"                {return new Symbol(CaracterCodigo.Tk_SiNoSi,yychar,yyline,new String(yytext()));} 
 "SINO"                   {return new Symbol(CaracterCodigo.Tk_SiNo,yychar,yyline,new String(yytext()));} 
-"INTERRUPTOR"            {return new Symbol(CaracterCodigo.Tk_Inter,yychar,yyline,new String(yytext()));} 
+"INTERRUMPIR"            {return new Symbol(CaracterCodigo.Tk_Inter,yychar,yyline,new String(yytext()));} 
 "CASO"                   {return new Symbol(CaracterCodigo.Tk_Caso,yychar,yyline,new String(yytext()));} 
 "DEFECTO"                {return new Symbol(CaracterCodigo.Tk_Defec,yychar,yyline,new String(yytext()));} 
 "MIENTRAS"               {return new Symbol(CaracterCodigo.Tk_Mientras,yychar,yyline,new String(yytext()));} 
