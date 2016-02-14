@@ -24,7 +24,7 @@ System.out.println("Error en la Línea " + (s.right+1)+ "Columna "+s.left+". Ide
 
 :}
 
-terminal Tk_import,Tk_abrir,Tk_ruta,Tk_public,Tk_private,Tk_protect,Tk_clase,Tk_name,Tk_Puntos;  
+terminal Tk_import,Tk_pote,Tk_abrir,Tk_ruta,Tk_public,Tk_private,Tk_protect,Tk_clase,Tk_name,Tk_Puntos;  
 terminal Tk_heredar,Tk_DobleB,Tk_Comentario,Tk_OpenC,Tk_string,Tk_double,Tk_bool,Tk_int,Tk_char,Tk_void ;
 terminal Tk_suma,Tk_resta,Tk_div,Tk_multi,Tk_plus,Tk_minus,Tk_mayor,Tk_menor,Tk_mayorq;
 terminal Tk_menorq,Tk_igualIgual,Tk_dif,Tk_Abrir,Tk_Cerrar,Tk_Not,Tk_Or,Tk_xOr,Tk_And,Tk_Comillas,Tk_Open,Tk_Close,Tk_Coma;
@@ -32,11 +32,18 @@ terminal Tk_Igual,Tk_print,Tk_mientras,Tk_true,Tk_false,Tk_Asig,Tk_puntoComa,Tk_
 terminal Tk_CloseC,Tk_Dosp,Tk_SiNoSi,Tk_SiNo,Tk_Inter,Tk_Caso,Tk_Defec,Tk_Mientras,Tk_Hacer,TK_Continuar,Tk_Exit,Tk_return,Tk_Continuar,Tk_Error; 
 
 
-non terminal Linea0,Linea1,Linea2,Linea3,Linea4,Linea5,Linea6,Linea7,Linea8,Operaciones,Comparacion;
+non terminal Linea0,Linea1,Linea2,Linea3,Linea4,Linea5,Linea6,Linea7,Linea8,Linea9,Operaciones,Comparacion,Operaciones2;
 non terminal LineaComen,LineaVar,LineaVar1,LineaConta,LineaOpera,LineaRela,LineaAgrupa,LineaLog,LineaGen,LineaAsig,LineaMetod,LineaVisi,LineaCyH;
 non terminal LineaSenteSi,LineaSenteCaso,LineaSenteMien,LineaSenteConti,LineaVar2;
 
-precedence left Tk_new; 
+precedence left Tk_new, Tk_suma, Tk_resta, Tk_Or;
+precedence left Tk_div, Tk_multi,Tk_xOr;
+precedence left Tk_pote, Tk_And;
+precedence left Tk_plus, Tk_minus, Tk_Not;
+precedence left Tk_name , Tk_Puntos;
+
+
+
 
 start with Linea0;
 
@@ -91,6 +98,7 @@ LineaVar2::= Tk_new Tk_name LineaAgrupa Tk_name LineaAgrupa
 LineaOpera::=Tk_suma
             |Tk_resta
             |Tk_div
+            |Tk_pote
             |Tk_multi;
 
 LineaConta::= Tk_name Tk_plus Tk_puntoComa 
@@ -103,7 +111,8 @@ LineaRela::=Tk_mayor
            |Tk_mayorq
            |Tk_menorq
            |Tk_igualIgual
-           |Tk_dif;
+           |Tk_dif
+           |LineaLog;
 
 //Signos de Agrupacion
 
@@ -124,7 +133,6 @@ LineaGen::=Tk_Comillas
           |Tk_Close
           |Tk_Coma
           |Tk_Igual
-          |Tk_print
           |Tk_mientras
           |Tk_true
           |Tk_false;
@@ -165,43 +173,49 @@ LineaSenteConti::=TK_Continuar
 Linea1::= LineaVisi LineaCyH Tk_name LineaCyH Tk_name LineaGen Linea2 LineaGen {:JOptionPane.showMessageDialog(null, "Copilacion Exitosa ", "Copilacion", JOptionPane.WARNING_MESSAGE);:}
          |LineaVisi LineaVar Tk_name LineaAgrupa LineaAgrupa LineaGen Linea2 LineaGen;
 
-Linea2::= LineaSenteSi LineaAgrupa Tk_name LineaRela LineaAgrupa  LineaGen Linea2 LineaGen //Linea funciones        
-         |LineaSenteCaso LineaAgrupa Tk_name LineaAgrupa LineaGen Linea3 LineaGen  //If,While
+Linea2::= LineaSenteSi LineaAgrupa Tk_name LineaRela Tk_name LineaAgrupa  LineaGen Linea2 LineaGen Linea2 //Linea funciones        
+         |LineaSenteSi LineaGen Linea2 LineaGen Linea2
+         |LineaSenteCaso LineaAgrupa Operaciones2 LineaAgrupa LineaGen Linea3 LineaGen  //If,While
          |LineaMetod LineaAgrupa Tk_name LineaAgrupa LineaAsig // Metodos
          |LineaMetod Tk_name //llamar metodo
          |Linea1 //Si hay otro funcion
          |LineaComen Linea2 //Comentario
          |LineaVar LineaVar1 Linea2 //variables
+         |Operaciones Linea2
+         |LineaSenteConti
+         |LineaSenteMien LineaAgrupa Tk_name LineaRela Tk_name LineaAgrupa  LineaGen Linea2 LineaGen Linea2
+         |LineaSenteMien LineaGen Linea2 LineaGen Linea2 
+         |Linea8
+         |Linea3
+         |Tk_print LineaAgrupa LineaGen Tk_name LineaGen LineaAgrupa Tk_puntoComa
          |;
 
-Linea3::=LineaSenteCaso  Tk_name Tk_Dosp Linea4;//If,While
-
-/*
-*
-* Sentencias mientras
-*/
-
-Linea4::=Linea3
-        |LineaSenteMien LineaAgrupa Tk_name LineaAgrupa LineaGen Linea5;
-/*
-*
-*Sentecnias mientras
-*/
-
-Linea5::= LineaSenteMien LineaGen Linea4;
+Linea3::=LineaSenteCaso  Tk_name Tk_Dosp Linea2;//If,While
 
 /*
 *
 * Operaciones suma resta multi div
 */
 
-Operaciones::= Tk_Puntos Linea6;
+Operaciones::= Tk_Puntos Linea6 ;
+              
               
 
 Linea6::=LineaOpera Linea7;
 
-Linea7::=Tk_Puntos Operaciones
-        |Tk_Puntos Tk_puntoComa;
+Linea7::=Tk_Puntos Linea6
+        |Tk_Puntos Tk_puntoComa 
+        ;
+
+Operaciones2::=Tk_Puntos Linea8
+              |Tk_name Linea8;
+Linea8::=LineaOpera Linea9;
+
+Linea9::=Tk_Puntos Linea8
+        |Tk_name Linea8
+        |Tk_name
+        |Tk_Puntos;
+        
 /*
 *
 *
@@ -209,7 +223,9 @@ Linea7::=Tk_Puntos Operaciones
 
 Linea8::= Tk_name LineaAgrupa Tk_Puntos LineaAgrupa LineaGen Linea2 LineaGen;//metodos
 
-Comparacion::= Tk_name LineaLog Tk_name; //comparaciones
+
+
+//Comparacion::= Tk_name LineaLog Tk_name; //comparaciones
 
 
 
