@@ -7,6 +7,8 @@ package ppractica2016_200915715;
 
 import ArchivosXml.*;
 import ArchivosCodigo.*;
+import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import java.io.StringReader;
+import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -23,6 +26,11 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author enrique
  */
 public class Ide extends javax.swing.JFrame {
+    
+    int conta=1;
+    int conta2 = 1;
+    String var="1."+"\n";
+    String var2="1."+"\n";
 
     /**
      * Creates new form Ide
@@ -30,6 +38,11 @@ public class Ide extends javax.swing.JFrame {
     public Ide() {
         initComponents();
         //setSize(600,620);
+        jTextArea3.setText("1.");
+        jTextArea4.setText("1.");
+        jTextArea3.setBorder(new LineBorder(Color.WHITE,0));
+         jTextArea3.setBackground(Color.WHITE);
+        //var="";
     }
 
     /**
@@ -49,25 +62,44 @@ public class Ide extends javax.swing.JFrame {
         jTextArea2 = new javax.swing.JTextArea();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jScrollPane4 = new javax.swing.JScrollPane();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTextArea3 = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTextArea4 = new javax.swing.JTextArea();
         jPanel5 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setExtendedState(6);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jScrollPane1.setViewportView(jTree1);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 235, 593));
+
+        jPanel4.setLayout(null);
+
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
+        jTextArea2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jTextArea2.setMargin(new java.awt.Insets(2, 0, 2, 0));
+        jTextArea2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextArea2KeyPressed(evt);
+            }
+        });
         jScrollPane3.setViewportView(jTextArea2);
+
+        jPanel4.add(jScrollPane3);
+        jScrollPane3.setBounds(540, 10, 286, 570);
 
         jButton2.setText(">");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -75,6 +107,8 @@ public class Ide extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
+        jPanel4.add(jButton2);
+        jButton2.setBounds(370, 80, 101, 23);
 
         jButton1.setText(">>");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -82,45 +116,50 @@ public class Ide extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        jPanel4.add(jButton1);
+        jButton1.setBounds(370, 120, 101, 23);
+
+        jScrollPane5.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane5.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        jTextArea3.setColumns(0);
+        jTextArea3.setRows(0);
+        jTextArea3.setBorder(null);
+        jTextArea3.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        jTextArea3.setEnabled(false);
+        jTextArea3.setSelectionColor(new java.awt.Color(255, 255, 255));
+        jScrollPane5.setViewportView(jTextArea3);
+        jTextArea3.getAccessibleContext().setAccessibleParent(jTextArea1);
+
+        jPanel4.add(jScrollPane5);
+        jScrollPane5.setBounds(40, 20, 31, 560);
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
+        jTextArea1.setBorder(null);
+        jTextArea1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextArea1KeyPressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTextArea1);
 
-        jScrollPane4.setViewportView(jScrollPane2);
+        jPanel4.add(jScrollPane2);
+        jScrollPane2.setBounds(70, 20, 269, 560);
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(110, 110, 110)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(72, 72, 72))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                        .addGap(157, 157, 157)
-                        .addComponent(jButton2)
-                        .addGap(43, 43, 43)
-                        .addComponent(jButton1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane3))
-                .addContainerGap())
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
-        );
+        jScrollPane4.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane4.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        jTextArea4.setColumns(0);
+        jTextArea4.setRows(0);
+        jTextArea4.setBorder(null);
+        jTextArea4.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        jTextArea4.setEnabled(false);
+        jTextArea4.setMargin(new java.awt.Insets(2, 0, 2, 0));
+        jScrollPane4.setViewportView(jTextArea4);
+
+        jPanel4.add(jScrollPane4);
+        jScrollPane4.setBounds(510, 10, 30, 570);
 
         jTabbedPane1.addTab("tab1", jPanel4);
 
@@ -128,21 +167,29 @@ public class Ide extends javax.swing.JFrame {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 831, Short.MAX_VALUE)
+            .addGap(0, 905, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 410, Short.MAX_VALUE)
+            .addGap(0, 616, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("tab2", jPanel5);
         jTabbedPane1.addTab("tab3", jTabbedPane2);
 
-        jMenu1.setText("Archivo");
-        jMenuBar1.add(jMenu1);
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(272, 0, 910, -1));
 
-        jMenu2.setText("Analizar");
-        jMenuBar1.add(jMenu2);
+        jMenu1.setText("Archivo");
+
+        jMenuItem1.setText("Abrir");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu1);
 
         jMenu3.setText("Reportes");
         jMenuBar1.add(jMenu3);
@@ -150,27 +197,10 @@ public class Ide extends javax.swing.JFrame {
         jMenu4.setText("Ayuda");
         jMenuBar1.add(jMenu4);
 
-        setJMenuBar(jMenuBar1);
+        jMenu5.setText("Abrir");
+        jMenuBar1.add(jMenu5);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(73, 73, 73)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 836, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jTabbedPane1))
-                .addContainerGap())
-        );
+        setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -197,10 +227,69 @@ public class Ide extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+         FileNameExtensionFilter Filtro= new FileNameExtensionFilter("Archivos  usac","usac");
+        
+        JFileChooser nuevo= new JFileChooser();
+        nuevo.setFileFilter(Filtro);
+        int resultado = nuevo.showOpenDialog(null);
+        if(resultado==JFileChooser.APPROVE_OPTION){
+        File file=nuevo.getSelectedFile();
+         try{
+        FileReader Leer=new FileReader(String.valueOf(file));
+        BufferedReader lector = new BufferedReader(Leer);
+        String palabra2;
+        String texto="";
+        while((palabra2=lector.readLine())!=null){
+        texto+=palabra2+"\n";
+        conta++;
+             var = var+ (conta+"." +"\n");
+             jTextArea3.setText(var);
+
+        }
+        jTextArea1.setText(texto);
+        }catch(Exception ex){
+
+
+
+
+        }
+
+
+
+        } 
+             
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jTextArea1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea1KeyPressed
+        // TODO add your handling code here:
+         if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+      // Enter was pressed. Your code goes here.
+             conta++;
+             var = var+ (conta+"." +"\n");
+             jTextArea3.setText(var);
+             
+   }
+    }//GEN-LAST:event_jTextArea1KeyPressed
+
+    private void jTextArea2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea2KeyPressed
+        // TODO add your handling code here:
+            if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+      // Enter was pressed. Your code goes here.
+             conta2++;
+             var2 = var2+ (conta2+"." +"\n");
+             jTextArea4.setText(var2);
+             
+   }
+    }//GEN-LAST:event_jTextArea2KeyPressed
+
+ 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -236,20 +325,24 @@ public class Ide extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextArea jTextArea3;
+    private javax.swing.JTextArea jTextArea4;
     private javax.swing.JTree jTree1;
     // End of variables declaration//GEN-END:variables
 }
