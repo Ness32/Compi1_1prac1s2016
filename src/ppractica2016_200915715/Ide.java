@@ -129,7 +129,6 @@ public class Ide extends javax.swing.JFrame {
         jTextArea3.setEnabled(false);
         jTextArea3.setSelectionColor(new java.awt.Color(255, 255, 255));
         jScrollPane5.setViewportView(jTextArea3);
-        jTextArea3.getAccessibleContext().setAccessibleParent(jTextArea1);
 
         jPanel4.add(jScrollPane5);
         jScrollPane5.setBounds(40, 20, 31, 560);
