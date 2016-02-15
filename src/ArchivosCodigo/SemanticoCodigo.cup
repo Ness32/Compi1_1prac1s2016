@@ -9,7 +9,14 @@ action code{:
 /*
 static Stack pilaCodigo= new Stack();
 static Stack erroresCodigo= new Stack();
+static Stack programa= new Stack();
+
 */
+public void datos(Object copiado){
+programa.push(copiado);
+
+}
+
 :}
 parser code
 {:
@@ -48,7 +55,7 @@ precedence left Tk_name , Tk_Puntos;
 start with Linea0;
 
 //importacion
-Linea0::= Tk_import  LineaAgrupa Tk_Comillas Tk_name Tk_Comillas LineaAgrupa Tk_puntoComa Linea1
+Linea0::= Tk_import:t  LineaAgrupa Tk_Comillas:a Tk_name:b Tk_Comillas:c LineaAgrupa Tk_puntoComa:e Linea1 {:datos(t);datos(a);datos(b);datos(c);datos(e);:}
          |Linea1 //archivos de importacion
          |LineaComen Linea0;
 
@@ -58,111 +65,111 @@ Linea0::= Tk_import  LineaAgrupa Tk_Comillas Tk_name Tk_Comillas LineaAgrupa Tk_
 *
 */
 //visibilidad
-LineaVisi::= Tk_public 
-         |Tk_private 
-         |Tk_protect ;
+LineaVisi::= Tk_public:t {:datos(t);:} 
+         |Tk_private:t {:datos(t);:} 
+         |Tk_protect:t {:datos(t);:} ;
 
 //Clase y Heredad
-LineaCyH::= Tk_heredar
-           |Tk_clase;
+LineaCyH::= Tk_heredar:t {:datos(t);:}
+           |Tk_clase:t {:datos(t);:};
 
 
 
 //Comentarios
 
-LineaComen::= Tk_DobleB Tk_name  //Comentario Simple
-             |Tk_OpenC Tk_name Tk_CloseC; //Comentario Doble
+LineaComen::= Tk_DobleB:a Tk_name:t {:datos(a);datos(t);:}  //Comentario Simple
+             |Tk_OpenC:a Tk_name:t Tk_CloseC:c :t {:datos(t);datos(t);datos(c):}; //Comentario Doble
 
 
 
 //Tipo de Datos
 
-LineaVar::=Tk_string
-         |Tk_double 
-         |Tk_bool 
-         |Tk_int 
-         |Tk_char 
-         |Tk_void ;
+LineaVar::=Tk_string:t {:datos(t);:}
+         |Tk_double:t {:datos(t);:} 
+         |Tk_bool:t {:datos(t);:} 
+         |Tk_int:t {:datos(t);:} 
+         |Tk_char:t {:datos(t);:} 
+         |Tk_void:t {:datos(t);:} ;
          
 //Variable
-LineaVar1::=Tk_name Tk_puntoComa 
-           |Tk_name  Tk_Coma LineaVar1
-           |Tk_name Tk_Asig LineaVar2
+LineaVar1::=Tk_name:a Tk_puntoComa :t {:datos(a);datos(t);:} 
+           |Tk_name:a  Tk_Coma:t LineaVar1 {:datos(a),datos(t);:}
+           |Tk_name:a Tk_Asig:t LineaVar2  {:datos(a),datos(t);:}
            |LineaVisi LineaVar1;
-LineaVar2::= Tk_new Tk_name LineaAgrupa Tk_name LineaAgrupa
+LineaVar2::= Tk_new:a Tk_name:c LineaAgrupa Tk_name:t LineaAgrupa {:datos(a);datos(c);datos(t);:}
             |;
             
 
 //Operaciones Aritmeticas
 
-LineaOpera::=Tk_suma
-            |Tk_resta
-            |Tk_div
-            |Tk_pote
-            |Tk_multi;
+LineaOpera::=Tk_suma:t {:datos(t);:}
+            |Tk_resta:t {:datos(t);:}
+            |Tk_div:t {:datos(t);:}
+            |Tk_pote:t {:datos(t);:}
+            |Tk_multi:t {:datos(t);:};
 
-LineaConta::= Tk_name Tk_plus Tk_puntoComa 
-            |Tk_name Tk_minus Tk_puntoComa;
+LineaConta::= Tk_name:a Tk_plus:c Tk_puntoComa:t {:datos(a);datos(c);datos(t);:} 
+            |Tk_name:a Tk_minus:c Tk_puntoComa:t {:datos(a);datos(c);datos(t);:};
 
 //Operaciones Relacionales
 
-LineaRela::=Tk_mayor    
-           |Tk_menor
-           |Tk_mayorq
-           |Tk_menorq
-           |Tk_igualIgual
-           |Tk_dif
+LineaRela::=Tk_mayor:t {:datos(t);:}    
+           |Tk_menor:t {:datos(t);:}
+           |Tk_mayorq:t {:datos(t);:}
+           |Tk_menorq:t {:datos(t);:}
+           |Tk_igualIgual:t {:datos(t);:}
+           |Tk_dif:t {:datos(t);:}
            |LineaLog;
 
 //Signos de Agrupacion
 
-LineaAgrupa::=Tk_Abrir
-             |Tk_Cerrar;
+LineaAgrupa::=Tk_Abrir:t {:datos(t);:}
+             |Tk_Cerrar:t {:datos(t);:};
 
 //Operaciones Logicas
 
-LineaLog::=Tk_Not
-          |Tk_Or
-          |Tk_xOr
-          |Tk_And;
+LineaLog::=Tk_Not:t {:datos(t);:}
+          |Tk_Or:t {:datos(t);:}
+          |Tk_xOr:t {:datos(t);:}
+          |Tk_And:t {:datos(t);:};
 
 //Componentes Generales
 
-LineaGen::=Tk_Comillas
-          |Tk_Open
-          |Tk_Close
-          |Tk_Coma
-          |Tk_Igual
-          |Tk_mientras
-          |Tk_true
-          |Tk_false;
+LineaGen::=Tk_Comillas:t {:datos(t);:}
+          |Tk_Open:t {:datos(t);:}
+          |Tk_Close:t {:datos(t);:}
+          |Tk_Coma:t {:datos(t);:}
+          |Tk_Igual:t {:datos(t);:}
+          |Tk_mientras:t {:datos(t);:}
+          |Tk_true:t {:datos(t);:}
+          |Tk_false:t {:datos(t);:};
 
 //Caracter de Asignacion
 
-LineaAsig::=Tk_Asig
-           |Tk_puntoComa;
+LineaAsig::=Tk_Asig:t {:datos(t);:}
+           |Tk_puntoComa:t {:datos(t);:};
 
 //Metodos y mas
 
-LineaMetod::= Tk_Super
-            |Tk_Over
-            |Tk_new
-            |Tk_Firts
+LineaMetod::= Tk_Super:t {:datos(t);:}
+            |Tk_Over:t {:datos(t);:}
+            |Tk_new:t {:datos(t);:}
+            |Tk_Firts:t {:datos(t);:}
             |;
 
-LineaSenteSi::=Tk_Si
-            |Tk_SiNoSi
-            |Tk_SiNo;
+LineaSenteSi::=Tk_Si:t {:datos(t);:}
+            |Tk_SiNoSi:t {:datos(t);:}
+            |Tk_SiNo:t {:datos(t);:};
             
-LineaSenteCaso::=Tk_Inter
-                |Tk_Caso
-                |Tk_Defec;
+LineaSenteCaso::=Tk_Inter:t {:datos(t);:}
+                |Tk_Caso:t {:datos(t);:}
+                |Tk_Defec:t {:datos(t);:};
 
-LineaSenteMien::=Tk_Mientras
-                |Tk_Hacer;
+LineaSenteMien::=Tk_Mientras:t {:datos(t);:}
+                |Tk_Hacer:t {:datos(t);:};
 
-LineaSenteConti::=TK_Continuar
-                |Tk_Exit;
+LineaSenteConti::=TK_Continuar:t {:datos(t);:}
+                |Tk_Exit:t {:datos(t);:};
 /*
 *
 *Area de Desarrollo de la gramatica se comenzo en Linea0
@@ -170,62 +177,62 @@ LineaSenteConti::=TK_Continuar
 *
 */
 
-Linea1::= LineaVisi LineaCyH Tk_name LineaCyH Tk_name LineaGen Linea2 LineaGen {:JOptionPane.showMessageDialog(null, "Copilacion Exitosa ", "Copilacion", JOptionPane.WARNING_MESSAGE);:}
-         |LineaVisi LineaVar Tk_name LineaAgrupa LineaAgrupa LineaGen Linea2 LineaGen;
+Linea1::= LineaVisi LineaCyH Tk_name:t LineaCyH Tk_name:a LineaGen Linea2 LineaGen {:datos(t);datos(a);JOptionPane.showMessageDialog(null, "Copilacion Exitosa ", "Copilacion", JOptionPane.WARNING_MESSAGE);:}
+         |LineaVisi LineaVar Tk_name:t LineaAgrupa LineaAgrupa LineaGen Linea2 LineaGen {:datos(t);:};
 
-Linea2::= LineaSenteSi LineaAgrupa Tk_name LineaRela Tk_name LineaAgrupa  LineaGen Linea2 LineaGen Linea2 //Linea funciones        
+Linea2::= LineaSenteSi LineaAgrupa Tk_name:t LineaRela Tk_name:a LineaAgrupa  LineaGen Linea2 LineaGen Linea2 //Linea funciones  {:datos(t);datos(a);:}       
          |LineaSenteSi LineaGen Linea2 LineaGen Linea2
          |LineaSenteCaso LineaAgrupa Operaciones2 LineaAgrupa LineaGen Linea3 LineaGen  //If,While
-         |LineaMetod LineaAgrupa Tk_name LineaAgrupa LineaAsig // Metodos
-         |LineaMetod Tk_name //llamar metodo
+         |LineaMetod LineaAgrupa Tk_name:t LineaAgrupa LineaAsig // Metodos  {:datos(t);:}
+         |LineaMetod Tk_name:t {:datos(t);:} //llamar metodo
          |Linea1 //Si hay otro funcion
          |LineaComen Linea2 //Comentario
          |LineaVar LineaVar1 Linea2 //variables
          |Operaciones Linea2
          |LineaSenteConti
-         |LineaSenteMien LineaAgrupa Tk_name LineaRela Tk_name LineaAgrupa  LineaGen Linea2 LineaGen Linea2
+         |LineaSenteMien LineaAgrupa Tk_name:t LineaRela Tk_name:a LineaAgrupa  LineaGen Linea2 LineaGen Linea2 :t {:datos(t);datos(a);:}
          |LineaSenteMien LineaGen Linea2 LineaGen Linea2 
          |Linea8
          |Linea3
-         |Tk_print LineaAgrupa LineaGen Tk_name LineaGen LineaAgrupa Tk_puntoComa
+         |Tk_print:t LineaAgrupa LineaGen Tk_name:a LineaGen LineaAgrupa Tk_puntoComa:c :t {:datos(t);datos(a);datos(c);:}
          |;
 
-Linea3::=LineaSenteCaso  Tk_name Tk_Dosp Linea2;//If,While
+Linea3::=LineaSenteCaso  Tk_name:t Tk_Dosp:a Linea2 {:datos(t);datos(a);:};//If,While
 
 /*
 *
 * Operaciones suma resta multi div
 */
 
-Operaciones::= Tk_Puntos Linea6 ;
+Operaciones::= Tk_Puntos:t Linea6 {:datos(t);:} ;
               
               
 
 Linea6::=LineaOpera Linea7;
 
-Linea7::=Tk_Puntos Linea6
-        |Tk_Puntos Tk_puntoComa 
+Linea7::=Tk_Puntos:t Linea6  {:datos(t);:}
+        |Tk_Puntos:t Tk_puntoComa:a {:datos(t);datos(a):} 
         ;
 
-Operaciones2::=Tk_Puntos Linea8
-              |Tk_name Linea8;
+Operaciones2::=Tk_Puntos:t {:datos(t);:} Linea8
+              |Tk_name:t {:datos(t);:} Linea8;
 Linea8::=LineaOpera Linea9;
 
-Linea9::=Tk_Puntos Linea8
-        |Tk_name Linea8
-        |Tk_name
-        |Tk_Puntos;
+Linea9::=Tk_Puntos:t {:datos(t);:} Linea8
+        |Tk_name:t {:datos(t);:} Linea8
+        |Tk_name:t {:datos(t);:}
+        |Tk_Puntos:t {:datos(t);:};
         
 /*
 *
 *
 */
 
-Linea8::= Tk_name LineaAgrupa Tk_Puntos LineaAgrupa LineaGen Linea2 LineaGen;//metodos
+Linea8::= Tk_name:t LineaAgrupa Tk_Puntos:a LineaAgrupa LineaGen Linea2 LineaGen;//metodos
 
 
 
-//Comparacion::= Tk_name LineaLog Tk_name; //comparaciones
+//Comparacion::= Tk_name:t LineaLog Tk_name:a; //comparaciones
 
 
 
