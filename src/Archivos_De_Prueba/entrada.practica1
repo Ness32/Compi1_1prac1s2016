@@ -1,0 +1,34 @@
+<proyecto>
+<nombre>"hola"</ nombre>
+<fecha_creacion>24-enero-2016</ fecha_creacion>
+<archs>
+<archivo>
+<nombre>"main"</ nombre>
+<ruta>"/main.usac"</ ruta>
+</ archivo>
+<archivo>
+<nombre>"clase1"</ nombre>
+<ruta>"/carpeta1/clase1.usac"</ ruta>
+</ archivo>
+<archivo>
+<nombre>"clase2"</ nombre>
+<ruta>"/carpeta2/clase2.usac"</ ruta>
+</ archivo>
+</ archs>
+<nombre>"hola2"</ nombre>
+<fecha_creacion>24-enero-2016</ fecha_creacion>
+<archs>
+<archivo>
+<nombre>"main2"</ nombre>
+<ruta>"/main2.usac"</ ruta>
+</ archivo>
+<archivo>
+<nombre>"clase12"</ nombre>
+<ruta>"/carpeta12/clase12.usac"</ ruta>
+</ archivo>
+<archivo>
+<nombre>"clase22"</ nombre>
+<ruta>"/carpeta22/clase22.usac"</ ruta>
+</ archivo>
+</ archs>
+</ proyecto>
