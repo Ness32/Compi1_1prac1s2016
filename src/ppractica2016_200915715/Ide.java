@@ -38,13 +38,33 @@ public class Ide extends javax.swing.JFrame {
      * Creates new form Ide
      */
     public Ide() {
-        initComponents();
-        //setSize(600,620);
-        jTextArea3.setText("1.");
-        jTextArea4.setText("1.");
-        jTextArea3.setBorder(new LineBorder(Color.WHITE,0));
-         jTextArea3.setBackground(Color.WHITE);
-        //var="";
+        try {
+            initComponents();
+            //setSize(600,620);
+            jTextArea3.setText("1.");
+            jTextArea4.setText("1.");
+            jTextArea3.setBorder(new LineBorder(Color.WHITE,0));
+            jTextArea3.setBackground(Color.WHITE);
+            //var="";
+            /**/
+            /**/
+            
+            //ArchivosXml lexicoXml = new ArchivosXml(new StringReader(jTextArea1.getText()));
+            ArchivosXml lexicoXml = new ArchivosXml(new FileInputStream("src/Archivos_De_Prueba/Entradas/Entrada1/Entrada1.practica1"));
+            ParseXml semanticoXml = new ParseXml(lexicoXml);
+            try {
+                semanticoXml.parse();
+            } catch (Exception ex) {
+                Logger.getLogger(Ide.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            for(int h=0;ParseXml.carpetas.size()-1>=h;h++){
+                System.out.println(ParseXml.carpetas.get(h));
+        }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Ide.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+         
     }
 
     /**
@@ -83,6 +103,8 @@ public class Ide extends javax.swing.JFrame {
         setExtendedState(6);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
+        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jScrollPane1.setViewportView(jTree1);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 235, 593));
@@ -96,7 +118,7 @@ public class Ide extends javax.swing.JFrame {
             }
         });
         jPanel4.add(jButton2);
-        jButton2.setBounds(370, 80, 101, 28);
+        jButton2.setBounds(370, 80, 101, 29);
 
         jButton1.setText(">>");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -105,7 +127,7 @@ public class Ide extends javax.swing.JFrame {
             }
         });
         jPanel4.add(jButton1);
-        jButton1.setBounds(370, 120, 101, 28);
+        jButton1.setBounds(370, 120, 101, 29);
 
         jScrollPane5.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane5.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -199,13 +221,7 @@ public class Ide extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-         ArchivosXml lexicoXml = new ArchivosXml(new StringReader(jTextArea1.getText()));
-            ParseXml semanticoXml = new ParseXml(lexicoXml);
-        try {
-            semanticoXml.parse();
-        } catch (Exception ex) {
-            Logger.getLogger(Ide.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
