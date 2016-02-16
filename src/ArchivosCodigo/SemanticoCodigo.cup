@@ -7,9 +7,9 @@ import javax.swing.JOptionPane;
 
 action code{:
 /*
-static Stack pilaCodigo= new Stack();
-static Stack erroresCodigo= new Stack();
-static Stack programa= new Stack();
+public static Stack pilaCodigo= new Stack();
+public static Stack erroresCodigo= new Stack();
+public static Stack programa= new Stack();
 
 */
 public void datos(Object copiado){
@@ -55,7 +55,7 @@ precedence left Tk_name , Tk_Puntos;
 start with Linea0;
 
 //importacion
-Linea0::= Tk_import:t  LineaAgrupa Tk_Comillas:a Tk_name:b Tk_Comillas:c LineaAgrupa Tk_puntoComa:e Linea1 {:datos(t);datos(a);datos(b);datos(c);datos(e);:}
+Linea0::= Tk_import:t{:datos(t);:}  LineaAgrupa Tk_Comillas:a {:datos(a);:} Tk_name:b{:datos(b);:} Tk_Comillas:c {:datos(c);:} LineaAgrupa Tk_puntoComa:e{:datos(e);:} Linea1
          |Linea1 //archivos de importacion
          |LineaComen Linea0;
 
@@ -78,7 +78,7 @@ LineaCyH::= Tk_heredar:t {:datos(t);:}
 //Comentarios
 
 LineaComen::= Tk_DobleB:a Tk_name:t {:datos(a);datos(t);:}  //Comentario Simple
-             |Tk_OpenC:a Tk_name:t Tk_CloseC:c :t {:datos(t);datos(t);datos(c):}; //Comentario Doble
+             |Tk_OpenC:a Tk_name:t Tk_CloseC:c  {:datos(a);datos(t);datos(c);:}; //Comentario Doble
 
 
 
@@ -92,11 +92,11 @@ LineaVar::=Tk_string:t {:datos(t);:}
          |Tk_void:t {:datos(t);:} ;
          
 //Variable
-LineaVar1::=Tk_name:a Tk_puntoComa :t {:datos(a);datos(t);:} 
-           |Tk_name:a  Tk_Coma:t LineaVar1 {:datos(a),datos(t);:}
-           |Tk_name:a Tk_Asig:t LineaVar2  {:datos(a),datos(t);:}
+LineaVar1::=Tk_name:a Tk_puntoComa:t {:datos(a);datos(t);:} 
+           |Tk_name:a{:datos(a);:}  Tk_Coma:t{:datos(t);:} LineaVar1 
+           |Tk_name:a{:datos(a);:} Tk_Asig:t{:datos(t);:} LineaVar2  
            |LineaVisi LineaVar1;
-LineaVar2::= Tk_new:a Tk_name:c LineaAgrupa Tk_name:t LineaAgrupa {:datos(a);datos(c);datos(t);:}
+LineaVar2::= Tk_new:a{:datos(a);:} Tk_name:c{:datos(c);:} LineaAgrupa Tk_name:t{:datos(t);:} LineaAgrupa
             |;
             
 
@@ -177,27 +177,27 @@ LineaSenteConti::=TK_Continuar:t {:datos(t);:}
 *
 */
 
-Linea1::= LineaVisi LineaCyH Tk_name:t LineaCyH Tk_name:a LineaGen Linea2 LineaGen {:datos(t);datos(a);JOptionPane.showMessageDialog(null, "Copilacion Exitosa ", "Copilacion", JOptionPane.WARNING_MESSAGE);:}
-         |LineaVisi LineaVar Tk_name:t LineaAgrupa LineaAgrupa LineaGen Linea2 LineaGen {:datos(t);:};
+Linea1::= LineaVisi LineaCyH Tk_name:t{:datos(t);:} LineaCyH Tk_name:a{:datos(a);:} LineaGen Linea2 LineaGen {:JOptionPane.showMessageDialog(null, "Copilacion Exitosa ", "Copilacion", JOptionPane.WARNING_MESSAGE);:}
+         |LineaVisi LineaVar Tk_name:t{:datos(t);:} LineaAgrupa LineaAgrupa LineaGen Linea2 LineaGen;
 
-Linea2::= LineaSenteSi LineaAgrupa Tk_name:t LineaRela Tk_name:a LineaAgrupa  LineaGen Linea2 LineaGen Linea2 //Linea funciones  {:datos(t);datos(a);:}       
+Linea2::= LineaSenteSi LineaAgrupa Tk_name:t{:datos(t);:} LineaRela Tk_name:a{:datos(a);:} LineaAgrupa  LineaGen Linea2 LineaGen Linea2 //Linea funciones        
          |LineaSenteSi LineaGen Linea2 LineaGen Linea2
          |LineaSenteCaso LineaAgrupa Operaciones2 LineaAgrupa LineaGen Linea3 LineaGen  //If,While
-         |LineaMetod LineaAgrupa Tk_name:t LineaAgrupa LineaAsig // Metodos  {:datos(t);:}
+         |LineaMetod LineaAgrupa Tk_name:t{:datos(t);:} LineaAgrupa LineaAsig // Metodos  
          |LineaMetod Tk_name:t {:datos(t);:} //llamar metodo
          |Linea1 //Si hay otro funcion
          |LineaComen Linea2 //Comentario
          |LineaVar LineaVar1 Linea2 //variables
          |Operaciones Linea2
          |LineaSenteConti
-         |LineaSenteMien LineaAgrupa Tk_name:t LineaRela Tk_name:a LineaAgrupa  LineaGen Linea2 LineaGen Linea2 :t {:datos(t);datos(a);:}
+         |LineaSenteMien LineaAgrupa Tk_name:t{:datos(t);:} LineaRela Tk_name:a{:datos(a);:} LineaAgrupa  LineaGen Linea2 LineaGen Linea2  
          |LineaSenteMien LineaGen Linea2 LineaGen Linea2 
          |Linea8
          |Linea3
-         |Tk_print:t LineaAgrupa LineaGen Tk_name:a LineaGen LineaAgrupa Tk_puntoComa:c :t {:datos(t);datos(a);datos(c);:}
+         |Tk_print:t {:datos(t);:} LineaAgrupa LineaGen Tk_name:a {:datos(a);:} LineaGen LineaAgrupa Tk_puntoComa:c {:datos(c);:}
          |;
 
-Linea3::=LineaSenteCaso  Tk_name:t Tk_Dosp:a Linea2 {:datos(t);datos(a);:};//If,While
+Linea3::=LineaSenteCaso  Tk_name:t{:datos(t);:} Tk_Dosp:a{:datos(a);:} Linea2;//If,While
 
 /*
 *
@@ -211,7 +211,7 @@ Operaciones::= Tk_Puntos:t Linea6 {:datos(t);:} ;
 Linea6::=LineaOpera Linea7;
 
 Linea7::=Tk_Puntos:t Linea6  {:datos(t);:}
-        |Tk_Puntos:t Tk_puntoComa:a {:datos(t);datos(a):} 
+        |Tk_Puntos:t Tk_puntoComa:a {:datos(t);datos(a);:} 
         ;
 
 Operaciones2::=Tk_Puntos:t {:datos(t);:} Linea8
@@ -228,11 +228,11 @@ Linea9::=Tk_Puntos:t {:datos(t);:} Linea8
 *
 */
 
-Linea8::= Tk_name:t LineaAgrupa Tk_Puntos:a LineaAgrupa LineaGen Linea2 LineaGen;//metodos
+Linea8::= Tk_name:t{:datos(t);:} LineaAgrupa Tk_Puntos:a{:datos(a);:} LineaAgrupa LineaGen Linea2 LineaGen;//metodos
 
 
 
-//Comparacion::= Tk_name:t LineaLog Tk_name:a; //comparaciones
+//Comparacion::= Tk_name:t LineaLog Tk_name:a {:datos(t);datos(a);:}; //comparaciones
 
 
 
