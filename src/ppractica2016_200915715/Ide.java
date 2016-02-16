@@ -31,7 +31,9 @@ public class Ide extends javax.swing.JFrame {
     int conta2 = 1;
     String var="1."+"\n";
     String var2="1."+"\n";
-
+    String var3="";
+    static String prueva="";
+    String Amarillo="";
     /**
      * Creates new form Ide
      */
@@ -58,8 +60,6 @@ public class Ide extends javax.swing.JFrame {
         jTree1 = new javax.swing.JTree();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel4 = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -68,6 +68,8 @@ public class Ide extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTextArea4 = new javax.swing.JTextArea();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jEditorPane1 = new javax.swing.JEditorPane();
         jPanel5 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -87,20 +89,6 @@ public class Ide extends javax.swing.JFrame {
 
         jPanel4.setLayout(null);
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jTextArea2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jTextArea2.setMargin(new java.awt.Insets(2, 0, 2, 0));
-        jTextArea2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextArea2KeyPressed(evt);
-            }
-        });
-        jScrollPane3.setViewportView(jTextArea2);
-
-        jPanel4.add(jScrollPane3);
-        jScrollPane3.setBounds(540, 10, 286, 570);
-
         jButton2.setText(">");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,7 +96,7 @@ public class Ide extends javax.swing.JFrame {
             }
         });
         jPanel4.add(jButton2);
-        jButton2.setBounds(370, 80, 101, 23);
+        jButton2.setBounds(370, 80, 101, 28);
 
         jButton1.setText(">>");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -117,7 +105,7 @@ public class Ide extends javax.swing.JFrame {
             }
         });
         jPanel4.add(jButton1);
-        jButton1.setBounds(370, 120, 101, 23);
+        jButton1.setBounds(370, 120, 101, 28);
 
         jScrollPane5.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane5.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -159,6 +147,11 @@ public class Ide extends javax.swing.JFrame {
 
         jPanel4.add(jScrollPane4);
         jScrollPane4.setBounds(510, 10, 30, 570);
+
+        jScrollPane6.setViewportView(jEditorPane1);
+
+        jPanel4.add(jScrollPane6);
+        jScrollPane6.setBounds(540, 10, 250, 520);
 
         jTabbedPane1.addTab("tab1", jPanel4);
 
@@ -224,6 +217,65 @@ public class Ide extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(Ide.class.getName()).log(Level.SEVERE, null, ex);
         }
+     
+        for(int k =0;ParseCodigo.programa.size()-1>=k;k++){
+            
+            try{
+                   if(Integer.valueOf((String) ParseCodigo.programa.get(k))>=0){
+                  System.out.println(ParseCodigo.programa.get(k) +" "+ k );
+                
+            }
+            
+            }catch(Exception e){
+               
+            }
+            
+         
+            
+            
+             System.out.println(ParseCodigo.programa.get(k) +" "+ k );
+                if(ParseCodigo.programa.get(k).equals("importar") ||ParseCodigo.programa.get(k).equals("publico") || ParseCodigo.programa.get(k).equals("privado") ||ParseCodigo.programa.get(k).equals("protegido") || ParseCodigo.programa.get(k).equals("clase") || ParseCodigo.programa.get(k).equals("heredar")  ){
+     //System.out.println("esta el <");
+     prueva="&lt;";
+    jEditorPane1.setContentType("text/html");
+         Amarillo=Amarillo+("<font color=\"9A13D4\">"+ParseCodigo.programa.get(k)+"</font>");
+    jEditorPane1.setText(Amarillo);
+     }
+      if(ParseCodigo.programa.get(k).equals("int")||ParseCodigo.programa.get(k).equals("double")||ParseCodigo.programa.get(k).equals("string")||ParseCodigo.programa.get(k).equals("char")||ParseCodigo.programa.get(k).equals("bool")||ParseCodigo.programa.get(k).equals("void") ||
+               ParseCodigo.programa.get(k).equals("super")|| ParseCodigo.programa.get(k).equals("@override")|| ParseCodigo.programa.get(k).equals("nuevo")|| ParseCodigo.programa.get(k).equals("retornar")||
+               ParseCodigo.programa.get(k).equals("principal")|| ParseCodigo.programa.get(k).equals("SI") ||  ParseCodigo.programa.get(k).equals("SINO_SI")|| ParseCodigo.programa.get(k).equals("SINO")|| ParseCodigo.programa.get(k).equals("INTERRUPTOR")|| ParseCodigo.programa.get(k).equals("CASO")|| ParseCodigo.programa.get(k).equals("DEFECTO")|| ParseCodigo.programa.get(k).equals("MIENTRAS")|| ParseCodigo.programa.get(k).equals("HACER")|| ParseCodigo.programa.get(k).equals("CONTINUAR")|| ParseCodigo.programa.get(k).equals("SALIR")){
+            jEditorPane1.setContentType("text/html");
+            Amarillo=Amarillo+("<font color=\"3564E5\">"+ParseCodigo.programa.get(k)+"</font>");
+            jEditorPane1.setText(Amarillo);
+      
+      }
+      
+       if(ParseCodigo.programa.get(k).equals("+")||ParseCodigo.programa.get(k).equals("-")||ParseCodigo.programa.get(k).equals("*")||ParseCodigo.programa.get(k).equals("/")||ParseCodigo.programa.get(k).equals("++")||ParseCodigo.programa.get(k).equals("--") ||
+             ParseCodigo.programa.get(k).equals(">") || ParseCodigo.programa.get(k).equals("<") || ParseCodigo.programa.get(k).equals(">=")||ParseCodigo.programa.get(k).equals("<=")||ParseCodigo.programa.get(k).equals("==")||ParseCodigo.programa.get(k).equals("!=")||ParseCodigo.programa.get(k).equals("(") ||ParseCodigo.programa.get(k).equals(")") ||
+                ParseCodigo.programa.get(k).equals("||")|| ParseCodigo.programa.get(k).equals("&&")|| ParseCodigo.programa.get(k).equals("??")|| ParseCodigo.programa.get(k).equals("!!")){
+            jEditorPane1.setContentType("text/html");
+            Amarillo=Amarillo+("<font color=\"011958\">"+ParseCodigo.programa.get(k)+"</font>");
+            jEditorPane1.setText(Amarillo);
+      
+      }
+        if(ParseCodigo.programa.get(k).equals(";")|| ParseCodigo.programa.get(k).equals("[") || ParseCodigo.programa.get(k).equals("]")){
+            jEditorPane1.setContentType("text/html");
+            Amarillo=Amarillo+("<font color=\"000000\">"+ParseCodigo.programa.get(k)+"</font>");
+            jEditorPane1.setText(Amarillo);
+      
+      }
+          if(ParseCodigo.programa.get(k).equals("\"")){
+            jEditorPane1.setContentType("text/html");
+            Amarillo=Amarillo+("<font color=\"705019\">"+ParseCodigo.programa.get(k)+"</font>");
+            jEditorPane1.setText(Amarillo);
+      
+      } 
+      
+                
+            //jTextArea2.setText(String.valueOf(ParseCodigo.programa.get(k)));
+           // var3= var3 +String.valueOf(ParseCodigo.programa.get(k));
+        }
+       //jTextArea2.setText(var3);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -272,17 +324,6 @@ public class Ide extends javax.swing.JFrame {
    }
     }//GEN-LAST:event_jTextArea1KeyPressed
 
-    private void jTextArea2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea2KeyPressed
-        // TODO add your handling code here:
-            if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
-      // Enter was pressed. Your code goes here.
-             conta2++;
-             var2 = var2+ (conta2+"." +"\n");
-             jTextArea4.setText(var2);
-             
-   }
-    }//GEN-LAST:event_jTextArea2KeyPressed
-
  
     /**
      * @param args the command line arguments
@@ -323,6 +364,7 @@ public class Ide extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
@@ -333,13 +375,12 @@ public class Ide extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextArea jTextArea4;
     private javax.swing.JTree jTree1;
