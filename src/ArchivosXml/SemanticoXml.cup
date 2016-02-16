@@ -7,9 +7,15 @@ import javax.swing.JOptionPane;
 
 action code{:
 /*
-static Stack pilaXml= new Stack();
-static Stack erroresXmL= new Stack();
+public static Stack pilaXml= new Stack();
+public static Stack erroresXmL= new Stack();
+public static Stack carpetas = new Stack();
 */
+public void datos(Object copiado){
+carpetas.push(copiado);
+
+}
+
 :}
 
 parser code
@@ -40,13 +46,13 @@ Linea1::= Tk_Proy Tk_Cerrar Linea2;
 
 Linea2::= Tk_Abrir Linea3;
 
-Linea3::= Tk_Name Tk_Cerrar Linea4
-         |Tk_Arch Tk_Cerrar Linea2
-         |Tk_Files Tk_Cerrar Linea2
-         |Tk_Ruta Tk_Cerrar Linea12
+Linea3::= Tk_Name:t{:datos(t);:} Tk_Cerrar Linea4
+         |Tk_Arch:t{:datos(t);:} Tk_Cerrar Linea2
+         |Tk_Files:t{:datos(t);:} Tk_Cerrar Linea2
+         |Tk_Ruta:t{:datos(t);:} Tk_Cerrar Linea12
          |Tk_Date Tk_Cerrar Linea9;
 
-Linea4::= Tk_Comillas Tk_Cont Tk_Comillas Linea5;
+Linea4::= Tk_Comillas Tk_Cont:t{:datos(t);:} Tk_Comillas Linea5;
 
 Linea5::= Tk_Abrir Tk_Diag Tk_Name Linea6
          |Tk_Abrir Tk_Diag Tk_Arch Linea7
@@ -59,9 +65,10 @@ Linea6::= Tk_Cerrar Linea2
 
 Linea7::=Tk_Cerrar Linea8;
 
-Linea8::= Tk_Abrir Tk_Diag Tk_Proy Tk_Cerrar{:JOptionPane.showMessageDialog(null, "Copilacion Exitosa ", "Copilacion", JOptionPane.WARNING_MESSAGE);:};
+Linea8::= Tk_Abrir Tk_Diag Tk_Proy Tk_Cerrar{:JOptionPane.showMessageDialog(null, "Copilacion Exitosa ", "Copilacion", JOptionPane.WARNING_MESSAGE);:}
+         |Linea2;
 
 Linea9::= Tk_Dia Tk_Guion Linea10; 
 Linea10::= Tk_Cont Tk_Guion Linea11; 
 Linea11::= Tk_Year Linea5;
- Linea12::= Tk_Comillas Tk_Luga Tk_Comillas Linea5;
+ Linea12::= Tk_Comillas Tk_Luga:t{:datos(t);:} Tk_Comillas Linea5;
