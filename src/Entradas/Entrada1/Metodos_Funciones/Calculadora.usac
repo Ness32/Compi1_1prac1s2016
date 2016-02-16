@@ -1,0 +1,95 @@
+#**
+ *
+ * @author Joaquin
+ *#
+publico clase Calculadora 
+{
+	#*
+	//Sintaxis Metodos/Funciones
+	tipo visibilidad nombre (parámetros)[
+	//Varias sentencias
+	]	
+	*#
+
+	//Declaración de n, variables
+    string a,b,c,d,e,f,g,h,i;
+	
+	//Constructor
+    Calculadora()
+    [
+        a::=""+1+"2"+3;
+        imprimir("Calculadora iniciando............\n");
+        //Thread.sleep(1000);
+    ]
+    
+    int publico sumar(int a, int b)
+    [
+        retornar a + b;
+    ]
+    
+    int publico restar(int a, int b)
+    [
+        retornar a-b;
+    ]
+    
+    int publico multiplicar(int a, int b)
+    [
+        int result ::= a * b;
+		retornar result;
+    ]
+    
+    double publico  dividir(double a, double b)
+    [
+        SI(b==0)
+        [
+            imprimir("Error, división por 0");
+            retornar 1;
+        ]
+        retornar a/b;
+    ]
+    
+    int publico potenciar_positivos(int base, int exponente)
+    [
+        int result::=base;
+        int contador ::= 1;
+        MIENTRAS(contador<exponente)
+        [
+            result ::= result*base;
+            contador ::= contador + 1;
+        ]
+        retornar result;
+    ]
+    
+    int publico factorial_recursivo(int numero)
+    [
+        SI ( numero <= 1 ) 
+        [
+              retornar 1;
+        ] 
+        SINO 
+        [
+            retornar numero*factorial_recursivo(numero-1);
+        ]
+    ]
+    
+    int publico factorial_iterativo(int numero)
+    [
+        int resultado ::= 1;
+        MIENTRAS(numero > 0)
+        [
+            resultado ::= resultado*numero;
+            numero--;
+        ]
+        retornar numero;
+     ]
+	 
+	 bool protegido and_0_1(int a, int b)
+	 {
+		SI(a%%b)
+		{
+			retorno true;
+		}
+		retorno false;
+	 }
+    
+}

@@ -1,0 +1,36 @@
+importar("/Metodos_Funciones/Calculadora.usac");
+#**
+ *
+ * @author Joaquin
+ *#
+privado clase MMain
+[
+    #**
+     * Este es un comentario de multiples lineas
+     *#	 
+    principal ()
+    [
+	
+		#*
+		//Sintaxis llamada a metodos/funciones (Paradigma Orientado a objetos)
+		id1.id2.id3. .... .idn()
+		id1.id2.id3. .... .idn(parametros)			
+		*#
+	
+        imprimir("---------------------------"+"-----------------------");
+        Calculadora calc = nuevo Calculadora();		
+		//Llamada a Metodos y funciones
+		//Como el lenguaje esta orientado a objetos
+		//Se puede ingresar a metodos/funciones/atributos de un OBJETO		
+        imprimir("El resultado de 10*77 = "+calc.multiplicar(10, 7));
+        imprimir("El resultado de 500/4 = "+calc.dividir(500, 4));
+        imprimir("El resultado de 2^8 = "+calc.potenciar_positivos(2, ((((8-8))))+(15-(15))+1*2*2*2));
+        imprimir("El factorial de 10 = "+calc.factorial_iterativo(10));
+		
+		imprimir("And: 1 %% 0 = "+calc.and_0_1(true,true));
+		
+        imprimir("---------------------------"+"-----------------------");
+    ]
+    
+	//Hola
+]

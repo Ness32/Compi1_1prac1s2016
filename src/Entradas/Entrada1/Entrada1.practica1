@@ -1,0 +1,22 @@
+<proyecto>
+
+	<nombre>
+		"Entrada1"
+	</nombre>
+	
+	<fecha_creacion>12-febrero-2016</fecha_creacion>
+	
+	<archs>
+		
+		<archivo>
+			<nombre>"MMain"</nombre>
+			<ruta>"/Main/MMain.usac"</ruta>
+		</archivo>
+		
+		<archivo>
+			<nombre>"Calculadora"</nombre>
+			<ruta>"/Metodos_Funciones/Calculadora.usac"</ruta>
+		</archivo>
+	</archs>
+	
+</proyecto>

@@ -1,0 +1,111 @@
+importar("/Metodos_Funciones/Calculadora.usac");
+#**
+ *
+ * @author Joaquin
+ *#
+privado clase MMain
+[
+    #**
+     * Este es un comentario de multiples lineas
+     *#	 
+	 
+	//Declaración de n, variables
+    string a,b,c,d,e,f,g,h,i;
+	 
+    principal ()
+    [
+	
+		#*
+		//Sintaxis llamada a metodos/funciones (Paradigma Orientado a objetos)
+		id1.id2.id3. .... .idn()
+		id1.id2.id3. .... .idn(parametros)			
+		*#
+	
+        imprimir("---------------------------"+"-----------------------");
+        Calculadora calc = nuevo Calculadora();		
+		//Llamada a Metodos y funciones
+		//Como el lenguaje esta orientado a objetos
+		//Se puede ingresar a metodos/funciones/atributos de un OBJETO		
+        imprimir("El resultado de 10*77 = "+multiplicar(10, 7));
+        imprimir("El resultado de 500/4 = "+dividir(500, 4));
+        imprimir("El resultado de 2^8 = "+potenciar_positivos(2, ((((8-8))))+(15-(15))+1*2*2*2));
+        imprimir("El factorial de 10 = "+factorial_iterativo(10));
+		
+		imprimir("And: 1 %% 0 = "+and_0_1(true,true));
+		
+        imprimir("---------------------------"+"-----------------------");
+    ]
+	
+	int publico sumar(int a, int b)
+    [
+        retornar a + b;
+    ]
+    
+    int publico restar(int a, int b)
+    [
+        retornar a-b;
+    ]
+    
+    int publico multiplicar(int a, int b)
+    [
+        int result ::= a * b;
+		retornar result;
+    ]
+    
+    double publico  dividir(double a, double b)
+    [
+        SI(b==0)
+        [
+            imprimir("Error, división por 0");
+            retornar 1;
+        ]
+        retornar a/b;
+    ]
+    
+    int publico potenciar_positivos(int base, int exponente)
+    [
+        int result::=base;
+        int contador ::= 1;
+        MIENTRAS(contador<exponente)
+        [
+            result ::= result*base;
+            contador ::= contador + 1;
+        ]
+        retornar result;
+    ]
+    
+    int publico factorial_recursivo(int numero)
+    [
+        SI ( numero <= 1 ) 
+        [
+              retornar 1;
+        ] 
+        SINO 
+        [
+            retornar numero*factorial_recursivo(numero-1);
+        ]
+    ]
+    
+    int publico factorial_iterativo(int numero)
+    [
+        int resultado ::= 1;
+        MIENTRAS(numero > 0)
+        [
+            resultado ::= resultado*numero;
+            numero--;
+        ]
+        retornar numero;
+     ]
+	 
+	 bool protegido and_0_1(int a, int b)
+	 {
+		SI(a%%b)
+		{
+			retorno true;
+		}
+		retorno false;
+	 }
+    
+    
+	//Hola
+]

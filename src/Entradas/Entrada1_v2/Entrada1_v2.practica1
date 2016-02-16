@@ -1,0 +1,18 @@
+<proyecto>
+
+	<nombre>
+		"Entrada1_v2"
+	</nombre>
+	
+	<fecha_creacion>12-febrero-2016</fecha_creacion>
+	
+	<archs>
+		
+		<archivo>
+			<nombre>"MMain"</nombre>
+			<ruta>"/Main/MMain.usac"</ruta>
+		</archivo>
+		
+	</archs>
+	
+</proyecto>
