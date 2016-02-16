@@ -168,8 +168,8 @@ LineaSenteCaso::=Tk_Inter:t {:datos(t);:}
 LineaSenteMien::=Tk_Mientras:t {:datos(t);:}
                 |Tk_Hacer:t {:datos(t);:};
 
-LineaSenteConti::=TK_Continuar:t {:datos(t);:}
-                |Tk_Exit:t {:datos(t);:};
+LineaSenteConti::=TK_Continuar:t{:datos(t);:} LineaAsig
+                |Tk_Exit:t {:datos(t);:} LineaAsig;
 /*
 *
 *Area de Desarrollo de la gramatica se comenzo en Linea0
@@ -189,7 +189,7 @@ Linea2::= LineaSenteSi LineaAgrupa Tk_name:t{:datos(t);:} LineaRela Tk_name:a{:d
          |LineaComen Linea2 //Comentario
          |LineaVar LineaVar1 Linea2 //variables
          |Operaciones Linea2
-         |LineaSenteConti
+         |LineaSenteConti Linea2
          |LineaSenteMien LineaAgrupa Tk_name:t{:datos(t);:} LineaRela Tk_name:a{:datos(a);:} LineaAgrupa  LineaGen Linea2 LineaGen Linea2  
          |LineaSenteMien LineaGen Linea2 LineaGen Linea2 
          |Linea8
