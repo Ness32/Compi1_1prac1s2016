@@ -1,0 +1,14 @@
+importar("archivo3");
+protegido clase mapa heredar mapamundo[
+privado void buscar()[
+INTERRUMPIR(a+b+c)[
+CASO a:
+1+1+1;
+salir;
+CASO 100:
+imprimir("Comentario");
+]
+DEFECTO:
+1+1;
+]
+]
