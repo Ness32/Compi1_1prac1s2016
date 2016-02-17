@@ -4,11 +4,11 @@ privado void buscar()[
 INTERRUMPIR(a+b+c)[
 CASO a:
 1+1+1;
-salir;
-CASO 100:
+CONTINUAR;
+CASO b:
 imprimir("Comentario");
-]
 DEFECTO:
 1+1;
+]
 ]
 ]

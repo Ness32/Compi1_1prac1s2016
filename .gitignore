@@ -23,3 +23,7 @@ nb-configuration.xml
 *.swp
 *.DS_Store
 *.lock
+
+
+#other Files#
+Practica1_Ide.sh
