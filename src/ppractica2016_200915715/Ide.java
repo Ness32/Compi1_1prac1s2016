@@ -50,7 +50,7 @@ public class Ide extends javax.swing.JFrame {
             /**/
             
             //ArchivosXml lexicoXml = new ArchivosXml(new StringReader(jTextArea1.getText()));
-            ArchivosXml lexicoXml = new ArchivosXml(new FileInputStream("src/Archivos_De_Prueba/Entradas/Entrada1/Entrada1.practica1"));
+            ArchivosXml lexicoXml = new ArchivosXml(new FileInputStream("src/Entradas/Entrada1/Entrada1.practica1"));
             ParseXml semanticoXml = new ParseXml(lexicoXml);
             try {
                 semanticoXml.parse();
