@@ -13,9 +13,15 @@ import java_cup.runtime.Symbol;
 %unicode
 Lt=[a-zA-ZÑñ_]
 Dg=[0-9]
-
+blanco=[" "]
+linea=[\n]
+retorno=[\r]
+tab=[\t]
 %%
-
+{blanco}                     {/*Se ingnora*/}
+{linea}                      {/*Se ingnora*/}
+{retorno}                    {/*Se ingnora*/}
+{tab}                        {/*Se ingnora*/}
 
 
 /*
@@ -230,7 +236,6 @@ Dg=[0-9]
 
 
 {Lt}({Lt}|{Dg})*              {return new Symbol(CaracterCodigo.Tk_name,yychar,yyline,new String(yytext()));}
-[  \t\r\f\n]+                 {}
 ({Dg})*                       {return new Symbol(CaracterCodigo.Tk_Puntos,yychar,yyline,new String(yytext()));}
 .                             {return new Symbol(CaracterCodigo.Tk_Error,yychar,yyline,new String(yytext()));}
 
